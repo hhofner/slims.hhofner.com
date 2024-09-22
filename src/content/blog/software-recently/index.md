@@ -20,7 +20,7 @@ programming, but still want to get my fingers moving a bit.
 
 ## Qutebrowser
 
-[A major vurnability was discovered by a security researcher](https://kibty.town/blog/arc/),
+[A major Arc browser vulnerability was discovered by a security researcher](https://kibty.town/blog/arc/),
 and it has been the talk of the town. More worryingly for me though was that I am an Arc 
 browser user. Reading this didn't sit well with me, and I thought that yeah, maybe I don't
 need to use this, that its features aren't really all that great. 
