@@ -1,0 +1,45 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { HOME } from "@consts";
+---
+
+<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <h1 class="animate font-semibold text-black dark:text-white">/uses</h1>
+      <div class="mt-8 space-y-16">
+        <section class="space-y-8">
+          <ul class="list-inside list-disc space-y-2">
+            <li>Macbook Air M2, 2023</li>
+            <li>Neovim (with occasional Zed)</li>
+            <li>Sublime Merge</li>
+            <li>Wezterm</li>
+            <li>Obsidian</li>
+            <li>Arc Browser</li>
+            <li>Qutebrowser</li>
+          </ul>
+          <h2 class="font-semibold">Social Networks</h2>
+          I use Pixelfed for images:
+
+          <iframe
+            src="https://pixelfed.tokyo/slims/embed"
+            class="pixelfed__embed"
+            style="max-width: 100%; border: 0px; overflow: hidden;"
+            width="400"
+            allowfullscreen="allowfullscreen"
+            scrolling="no"
+            height="590"></iframe>
+
+          <p>
+            I am tracking my books on Bookwyrm:
+
+            <a class="underline" href="https://ramblingreaders.org/user/hans"
+              >https://ramblingreaders.org/user/hans</a
+            >
+          </p>
+        </section>
+      </div>
+    </aside>
+  </Container>
+</Layout>
