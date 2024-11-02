@@ -24,38 +24,42 @@ const projects: CollectionEntry<"projects">[] = (
   <Container>
     <aside data-pagefind-ignore>
       <h1 class="animate font-semibold text-black dark:text-white">
-        Welcome! 👋
+        Moin, moin
       </h1>
+      <img src="/kagura.png" class="w-24" alt="Image of Kagura from Gintama" />
       <div class="space-y-16">
         <section>
           <article class="space-y-4">
             <span class="animate">
-              <p>
-                My "digital garden" of sorts.
-              </p>
+              <p>What I'm current listening to:</p>
             </span>
+            <img
+              class="ml-0"
+              src="https://toru.kio.dev/api/v1/akumzui"
+              alt="Last.fm Activity"
+            />
           </article>
         </section>
+      </div>
+    </aside>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Latest posts
-            </h2>
-            <Link href="/blog"> See all posts </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              blog.map((post) => (
-                <li>
-                  <ArrowCard entry={post} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+    <section class="animate space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-y-2">
+        <h2 class="font-semibold text-black dark:text-white">Latest posts</h2>
+        <Link href="/blog"> See all posts </Link>
+      </div>
+      <ul class="not-prose flex flex-col gap-4">
+        {
+          blog.map((post) => (
+            <li>
+              <ArrowCard entry={post} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-        <!-- <section class="animate space-y-6">
+    <!-- <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
             <h2 class="font-semibold text-black dark:text-white">
               Recent projects
@@ -73,42 +77,25 @@ const projects: CollectionEntry<"projects">[] = (
           </ul>
         </section> -->
 
-        <section class="animate space-y-4">
-          <h2 class="font-semibold text-black dark:text-white">
-            Let's Connect
-          </h2>
-          <article>
-            <p>
-              If you want to get in touch with me about something or just to say
-              hi, reach out on social media or send me an email.
-            </p>
-          </article>
-          <ul class="not-prose flex flex-wrap gap-2">
-            {
-              SOCIALS.map((SOCIAL) => (
-                <li class="flex gap-x-2 text-nowrap">
-                  <Link
-                    href={SOCIAL.HREF}
-                    external
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                  >
-                    {SOCIAL.NAME}
-                  </Link>
-                  {"/"}
-                </li>
-              ))
-            }
-            <li class="line-clamp-1">
+    <section class="animate mt-4 space-y-4">
+      <h2 class="font-semibold text-black dark:text-white">Socials</h2>
+      <article></article>
+      <ul class="not-prose flex flex-wrap gap-2">
+        {
+          SOCIALS.map((SOCIAL) => (
+            <li class="flex gap-x-2 text-nowrap">
               <Link
-                href={`mailto:${SITE.EMAIL}`}
-                aria-label={`Email ${SITE.TITLE}`}
+                href={SOCIAL.HREF}
+                external
+                aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
               >
-                {SITE.EMAIL}
+                {SOCIAL.NAME}
               </Link>
+              {"/"}
             </li>
-          </ul>
-        </section>
-      </div>
-    </aside>
+          ))
+        }
+      </ul>
+    </section>
   </Container>
 </Layout>
