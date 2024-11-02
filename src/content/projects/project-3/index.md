@@ -2,7 +2,7 @@
 title: "Astro Micro"
 description: "Astro Micro is an accessible and lightweight blog."
 date: "2024-05-26"
-demoURL: "https://astro-micro.vercel.app"
+demoURL: "https://slims.hhofner.com"
 repoURL: "https://github.com/trevortylerlee/astro-micro"
 ---
 
