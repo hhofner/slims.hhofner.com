@@ -1,7 +1,7 @@
 ---
 title: On Personal Productivity
 description: "A brief look at my current personal productivity tools."
-tags: ["Tech", "Slice of Life"]
+tags: ["tech", "slice of life"]
 date: "2024-08-26"
 ---
 

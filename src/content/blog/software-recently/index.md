@@ -1,6 +1,6 @@
 ---
 title: Software discoveries
-tags: ["Software", "Tech"]
+tags: ["software", "tech"]
 description: "Code, browser and RSS tools I've started using"
 date: 2024-09-22
 ---

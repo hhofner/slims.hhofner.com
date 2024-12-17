@@ -1,6 +1,6 @@
 ---
 title: Tech Is Sometimes Fun
-tags: ["Tech"]
+tags: ["tech"]
 description: "And sometimes it isn't"
 date: 2024-08-12
 ---

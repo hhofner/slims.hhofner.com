@@ -1,7 +1,7 @@
 ---
 title: Mundane Things
 description: "The little things in life"
-tags: ["Slice of Life"]
+tags: ["slice of life"]
 date: "2024-08-24"
 ---
 

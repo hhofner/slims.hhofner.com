@@ -1,0 +1,61 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrevious from "@components/BackToPrevious.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import PostNavigation from "@components/PostNavigation.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import Giscus from "@components/Giscus.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  const raw_tags = new Set([
+  ...posts
+    .flatMap((post) => post.data.tags)
+    .filter((tag) => !!tag)
+    .map((tag) => tag),
+  ]);
+
+  const tags = Array.from(raw_tags);
+
+  return tags.map((tag) => ({
+    params: { tag }
+  }));
+}
+const tag = Astro.params.tag;
+type Props = CollectionEntry<"blog">;
+
+const posts = (await getCollection("blog"))
+.filter((post) => !post.data.draft)
+.filter((post) => !!post.data.tags)
+  .filter((post) => post.data.tags.includes(tag))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// const post = Astro.props;
+// const { Content, headings } = await post.render();
+---
+
+<Layout title={`Posts with tag %{tag}`} description={`A list of posts with tag %{tag}`}>
+  <Container>
+    <section class="animate mt-4 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-y-2">
+        <h2 class="font-semibold text-black dark:text-white">Posts with tag { tag }</h2>
+      </div>
+      <ul class="not-prose flex flex-col gap-4">
+        {
+          posts.map((post) => (
+            <li>
+              <ArrowCard entry={post} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </Container>
+</Layout>

@@ -1,6 +1,6 @@
 ---
 title: A small project idea
-tags: ["Ideas"]
+tags: ["ideas"]
 description: "A social network for recycling tips"
 date: 2024-07-06
 ---

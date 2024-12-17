@@ -1,6 +1,6 @@
 ---
 title: Debugging GPG Key Issues
-tags: ["Software", "Tech"]
+tags: ["software", "tech"]
 description: "Nice little Github Gist"
 date: 2024-09-24
 ---

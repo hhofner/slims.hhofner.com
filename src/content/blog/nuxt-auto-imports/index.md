@@ -1,7 +1,7 @@
 ---
 title: Nuxt Auto Imports
 description: "And a link to how they work"
-tags: ["Tech", "Vue", "Nuxt"]
+tags: ["tech", "vue", "nuxt"]
 date: "2024-08-23"
 ---
 I've been working with Nuxt for a few weeks now, and was wondering exactly how

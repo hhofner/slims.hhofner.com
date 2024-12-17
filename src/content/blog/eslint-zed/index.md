@@ -2,7 +2,7 @@
 title: Setting up Zed with eslint only formatting
 date: 2024-08-17
 description: "How to set up Zed with ESLint only formatting"
-tags: coding
+tags: ["programming"]
 ---
 
 I was trying to set up the Zed editor with ESLint only formatting yesterday, and to save future someone

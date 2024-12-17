@@ -7,10 +7,21 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-const blog = (await getCollection("blog"))
+const raw_blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const blog = raw_blog.slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+// collect all tags in a set to remove duplicates
+const raw_tags = new Set([
+  ...raw_blog
+    .flatMap((post) => post.data.tags)
+    .filter((tag) => !!tag)
+    .map((tag) => tag),
+]);
+
+const tags = Array.from(raw_tags);
 
 const projects: CollectionEntry<"projects">[] = (
   await getCollection("projects")
@@ -71,6 +82,38 @@ const projects: CollectionEntry<"projects">[] = (
                 {SOCIAL.NAME}
               </Link>
               {"/"}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section class="animate mt-4 space-y-4">
+      <h2 class="font-semibold text-black dark:text-white">Tags</h2>
+      <ul class="flex flex-wrap gap-2 text-left">
+        <!-- { -->
+        <!--   raw_blog -->
+        <!--     .flatMap((post) => post.data.tags) -->
+        <!--     .filter((tag) => !!tag) -->
+        <!--     .map((tag) => ( -->
+        <!--       <li class="flex gap-x-2 text-nowrap"> -->
+        <!--         <Link -->
+        <!--           href={`/tags/${tag?.toLowerCase()}`} -->
+        <!--           aria-label={`Tag: ${tag}`} -->
+        <!--         > -->
+        <!--           #{tag} -->
+        <!--         </Link> -->
+        <!--       </li> -->
+        <!--     )) -->
+        <!-- } -->
+        {
+          tags.map((tag) => (
+            <li class="flex gap-x-2 text-nowrap">
+              <Link
+                href={`/tags/${tag?.toLowerCase()}`}
+                aria-label={`Tag: ${tag}`}
+              >
+                #{tag}
+              </Link>
             </li>
           ))
         }

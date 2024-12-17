@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import { PROJECTS } from "@consts";
+
+const data = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-10">
+        <div class="animate font-semibold text-black dark:text-white">
+          Tags
+        </div>
+        <ul class="text-left flex flex-wrap gap-2">
+          {
+        data.flatMap((post) => post.data.tags).filter(tag => !!tag).map((tag) => (
+            <li class="flex gap-x-2 text-nowrap">
+              <Link href={`/tags/${tag?.toLowerCase()}`} aria-label={`Tag: ${tag}`}>
+                #{tag}
+              </Link>
+            </li>
+          ))
+          }
+        </ul>
+      </div>
+    </aside>
+  </Container>
+</Layout>

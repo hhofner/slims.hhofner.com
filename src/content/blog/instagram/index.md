@@ -1,6 +1,6 @@
 ---
 title: Instagram
-tags: ["Tech", "Slice of Life"]
+tags: ["tech", "slice of life"]
 description: "Why I Dislike Instagram"
 date: "2024-08-24"
 ---
