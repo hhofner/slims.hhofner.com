@@ -2,7 +2,7 @@
 title: Software I Use
 description: List of software tools
 date: 2022-04-20
-tags: [software]
+tags: ["software"]
 ---
 
 One of the most most fun things about software is the seemingly endless options of software that are available for you to choose.

@@ -3,7 +3,7 @@ title: Language Documentation
 description: Some thoughts on technical documentation
 date: 2022-07-10
 status: published
-tags: [personal learning]
+tags: ["personal", "learning"]
 ---
 
 Over the years I've learned about the importance 

@@ -3,7 +3,7 @@ title: Using indeces as keys in React
 description: An explanation of a React fundamental
 date: 2022-05-18
 status: published
-tags: [react frontend ui optimization]
+tags: ["react", "frontend", "ui", "optimization"]
 ---
 
 ## Introduction

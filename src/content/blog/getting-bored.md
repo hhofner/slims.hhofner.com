@@ -3,7 +3,7 @@ title: Getting Bored
 description: The importance of boredom in our modern age
 date: 2022-08-09
 status: published
-tags: [blogging blog motivation]
+tags: ["blogging", "blog", "motivation"]
 ---
 
 It's been evident for several years that we are in peak time were your attention is worth

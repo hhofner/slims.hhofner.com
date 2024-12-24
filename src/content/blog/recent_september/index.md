@@ -2,7 +2,7 @@
 title: Recent (September)
 description: Stuff
 date: 2022-09-13
-tags: [personal recent]
+tags: ["personal", "recent"]
 ---
 
 ## Link-a-roo

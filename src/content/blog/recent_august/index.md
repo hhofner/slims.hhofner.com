@@ -2,7 +2,7 @@
 title: Recent (August)
 description: And other stuff
 date: 2022-08-16
-tags: [personal recent]
+tags: ["personal", "recent"]
 ---
 
 I've finally been able to have a long overdue extended break that has allowed me to clear my mind.

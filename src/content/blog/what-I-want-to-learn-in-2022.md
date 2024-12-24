@@ -3,7 +3,7 @@ title: What I Want To Learn In 2022
 description: A fun list
 date: 2022-01-01
 status: published
-tags: [personal learning]
+tags: ["personal", "learning"]
 ---
 
 Ben Awad used to always write down a list of things that he wanted

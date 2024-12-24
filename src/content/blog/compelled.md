@@ -3,7 +3,7 @@ title: Motivation to blog
 description: and blog and blog and blog
 date: 2022-06-28
 status: published
-tags: [blogging blog motivation]
+tags: ["blogging", "blog", "motivation"]
 ---
 
 Two posts that really stood out to me today are Rach Smiths' [post](https://rachsmith.com/fuck-it/) on _just writing_,

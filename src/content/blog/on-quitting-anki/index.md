@@ -3,7 +3,7 @@ title: On Quitting Anki
 description: Motivation & burnout
 date: 2022-06-13
 status: published
-tags: [japanese study personal]
+tags: ["japanese", "study", "personal"]
 ---
 
 TL;DR: Anki is a great software, but its' UI is poor and hard to use.
