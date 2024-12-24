@@ -11,7 +11,7 @@ I spent admittedly too much time always looking for the next thing or exploring 
 
 I hope for those who are always looking for something new or better to try, that this list might help you do just that 🙂.
 
-### Editors
+## Editors
 
 - Neovim with [Neovide](https://github.com/neovide/neovide)
 - [Nova](https://nova.app/) by Panic
@@ -30,7 +30,7 @@ Neovim is really great, and when you add it together with a cool GUI like Neovid
 
 Here are my "dotfiles" for neovim, if you're interested: [link](https://github.com/hhofner/dotfiles)
 
-### Browser
+## Browser
 
 - LibreWolf with these important plugins: Tridactyl vim keybindings and Yomichan (JP dictionary look up)
 - Qutebrowser
