@@ -1,17 +1,16 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import { SITE, HOME, SOCIALS } from "@consts";
-import ArrowCard from "@components/ArrowCard.astro";
-import Link from "@components/Link.astro";
-import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import Layout from '@layouts/Layout.astro'
+import Container from '@components/Container.astro'
+import { SITE, HOME, SOCIALS } from '@consts'
+import ArrowCard from '@components/ArrowCard.astro'
+import Link from '@components/Link.astro'
+import { getCollection } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+import { fetchBooks } from '@lib/utils'
 
-const raw_blog = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const raw_blog = (await getCollection('blog')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
-const blog = raw_blog.slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+const blog = raw_blog.slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
 
 // collect all tags in a set to remove duplicates
 const raw_tags = new Set([
@@ -19,16 +18,16 @@ const raw_tags = new Set([
     .flatMap((post) => post.data.tags)
     .filter((tag) => !!tag)
     .map((tag) => tag),
-]);
+])
 
-const tags = Array.from(raw_tags);
+const tags = Array.from(raw_tags)
 
-const projects: CollectionEntry<"projects">[] = (
-  await getCollection("projects")
-)
+const projects: CollectionEntry<'projects'>[] = (await getCollection('projects'))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE)
+
+const books = await fetchBooks()
 ---
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -74,14 +73,10 @@ const projects: CollectionEntry<"projects">[] = (
         {
           SOCIALS.map((SOCIAL) => (
             <li class="flex gap-x-2 text-nowrap">
-              <Link
-                href={SOCIAL.HREF}
-                external
-                aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-              >
+              <Link href={SOCIAL.HREF} external aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}>
                 {SOCIAL.NAME}
               </Link>
-              {"/"}
+              {'/'}
             </li>
           ))
         }
@@ -108,15 +103,26 @@ const projects: CollectionEntry<"projects">[] = (
         {
           tags.map((tag) => (
             <li class="flex gap-x-2 text-nowrap">
-              <Link
-                href={`/tags/${tag?.toLowerCase()}`}
-                aria-label={`Tag: ${tag}`}
-              >
+              <Link href={`/tags/${tag?.toLowerCase()}`} aria-label={`Tag: ${tag}`}>
                 #{tag}
               </Link>
             </li>
           ))
         }
+      </ul>
+    </section>
+    <section class="animate mt-4 space-y-4">
+      <h2 class="font-semibold text-black dark:text-white">Latest Read Books</h2>
+      <ul class="not-prose flex gap-4 overflow-x-auto">
+      {
+        books.map((book) => (
+        <li class="flex-shrink-0">
+          <a href={book.link}>
+          <img src={book.imageUrl} alt={book.name} class="h-48 w-32 object-cover transition-transform duration-300 hover:scale-105" />
+          </a>
+        </li>
+        ))
+      }
       </ul>
     </section>
   </Container>
