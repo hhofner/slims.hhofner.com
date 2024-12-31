@@ -165,3 +165,5 @@ slopes:
 This was in Yamagata.
 
 Looking forward to an eventful 2025. Thank you for reading!
+
+Idea and motivation from [acook](https://acook.jp/posts/2024/) and [brian](https://brian.jp/2024/12/30/what-a-year.html)
