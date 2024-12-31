@@ -27,6 +27,8 @@ However, in the honorable mentions I did ok:
 
 Given how random and unconcise these goals were, I think I really want to be a bit more focused, and precise for the following year...stay tuned.
 
+Notice for the sections below: I "squooshed" some images so they aren't as heavy and it really messed with the colors - just a warning.
+
 ## January
 
 ![A line early in the morning outside of an electric department store](./january-1.jpg)
