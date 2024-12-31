@@ -110,6 +110,12 @@ Despite it being quite humid and hot, we did get to see the beautiful Yamadera w
 
 ![](./july-yamadera.jpg)
 
+Got to see Doctor Yellow in Nagoya:
+
+![](./july-doctor-yellow.jpg)
+
+![](./july-nagoya.jpg)
+
 ## August
 
 Finally, with August being the worst month (I think) in terms of temperature, I tried my best
