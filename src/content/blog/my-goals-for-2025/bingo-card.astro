@@ -81,7 +81,7 @@ allTasks.splice(12, 0, "*FREE*");
   }
 
   .bingo-card {
-    background: white;
+    background: #1a1a1a;
     border: 2px solid #333;
     border-radius: 8px;
     overflow: hidden;
@@ -92,7 +92,7 @@ allTasks.splice(12, 0, "*FREE*");
   .header {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    background: #333;
+    background: #2d2d2d;
     color: white;
     font-weight: bold;
     font-size: 1.5rem;
@@ -112,7 +112,8 @@ allTasks.splice(12, 0, "*FREE*");
   }
 
   .cell {
-    background: white;
+    background: #2d2d2d;
+    color: white;
     aspect-ratio: 1;
     padding: 0.5rem;
     display: flex;
@@ -125,16 +126,17 @@ allTasks.splice(12, 0, "*FREE*");
   }
 
   .cell:hover {
-    background: #f0f0f0;
+    background: #3d3d3d;
   }
 
   .free {
-    background: #ffeb3b;
+    background: #4a4a00;
+    color: #ffeb3b;
     font-weight: bold;
   }
 
   .free:hover {
-    background: #fdd835;
+    background: #5a5a00;
   }
 
   @media (max-width: 600px) {
