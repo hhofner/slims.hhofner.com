@@ -71,7 +71,8 @@ allTasks.splice(12, 0, { task: "*FREE*", difficulty: 'free' });
     </div>
     <div class="grid grid-cols-5 gap-0.5 bg-gray-200 dark:bg-gray-700 p-0.5">
       {allTasks.map(({ task, difficulty }, i) => {
-        const difficultyColors = {
+        type DifficultyType = 'hardest' | 'hard' | 'slightlyDifficult' | 'medium' | 'easy' | 'free';
+        const difficultyColors: Record<DifficultyType, string> = {
           hardest: 'bg-red-200 hover:bg-red-300 dark:bg-red-800/60 dark:hover:bg-red-700/60',
           hard: 'bg-orange-200 hover:bg-orange-300 dark:bg-orange-800/60 dark:hover:bg-orange-700/60',
           slightlyDifficult: 'bg-yellow-200 hover:bg-yellow-300 dark:bg-yellow-800/60 dark:hover:bg-yellow-700/60',
@@ -85,7 +86,7 @@ allTasks.splice(12, 0, { task: "*FREE*", difficulty: 'free' });
             class={`
               aspect-square p-2 flex items-center justify-center text-center 
               text-sm sm:text-base text-gray-900 dark:text-white cursor-pointer transition-colors
-              ${difficultyColors[difficulty]}
+              ${difficultyColors[difficulty as DifficultyType]}
             `} 
             data-cell={i}
           >
