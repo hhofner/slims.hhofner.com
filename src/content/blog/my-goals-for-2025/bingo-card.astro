@@ -43,15 +43,21 @@ const random = () => {
     return x - Math.floor(x);
 };
 
-// Flatten and shuffle all tasks
-const allTasks = [...tasks.hardest, ...tasks.hard, ...tasks.slightlyDifficult, ...tasks.medium, ...tasks.easy];
+// Flatten and shuffle all tasks with their difficulty levels
+const allTasks = [
+  ...tasks.hardest.map(task => ({ task, difficulty: 'hardest' })),
+  ...tasks.hard.map(task => ({ task, difficulty: 'hard' })),
+  ...tasks.slightlyDifficult.map(task => ({ task, difficulty: 'slightlyDifficult' })),
+  ...tasks.medium.map(task => ({ task, difficulty: 'medium' })),
+  ...tasks.easy.map(task => ({ task, difficulty: 'easy' }))
+];
 for (let i = allTasks.length - 1; i > 0; i--) {
     const j = Math.floor(random() * (i + 1));
     [allTasks[i], allTasks[j]] = [allTasks[j], allTasks[i]];
 }
 
 // Insert FREE space in the middle (index 12)
-allTasks.splice(12, 0, "*FREE*");
+allTasks.splice(12, 0, { task: "*FREE*", difficulty: 'free' });
 ---
 
 <div class="flex justify-center py-8">
@@ -64,21 +70,29 @@ allTasks.splice(12, 0, "*FREE*");
       <div class="p-2 text-center">Y</div>
     </div>
     <div class="grid grid-cols-5 gap-0.5 bg-gray-700 p-0.5">
-      {allTasks.map((task, i) => (
-        <div 
-          class={`
-            aspect-square p-2 flex items-center justify-center text-center 
-            text-sm sm:text-base text-white cursor-pointer transition-colors
-            ${i === 12 
-              ? 'bg-yellow-900 hover:bg-yellow-800 text-yellow-300 font-bold' 
-              : 'bg-gray-800 hover:bg-gray-700'
-            }
-          `} 
-          data-cell={i}
-        >
-          {task}
-        </div>
-      ))}
+      {allTasks.map(({ task, difficulty }, i) => {
+        const difficultyColors = {
+          hardest: 'bg-red-900/40 hover:bg-red-800/40',
+          hard: 'bg-orange-900/40 hover:bg-orange-800/40',
+          slightlyDifficult: 'bg-yellow-900/40 hover:bg-yellow-800/40',
+          medium: 'bg-green-900/40 hover:bg-green-800/40',
+          easy: 'bg-blue-900/40 hover:bg-blue-800/40',
+          free: 'bg-yellow-900 hover:bg-yellow-800 text-yellow-300 font-bold'
+        };
+
+        return (
+          <div 
+            class={`
+              aspect-square p-2 flex items-center justify-center text-center 
+              text-sm sm:text-base text-white cursor-pointer transition-colors
+              ${difficultyColors[difficulty]}
+            `} 
+            data-cell={i}
+          >
+            {task}
+          </div>
+        );
+      })}
     </div>
   </div>
 </div>
