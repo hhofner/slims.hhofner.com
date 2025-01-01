@@ -37,7 +37,7 @@ const tasks = {
 };
 
 // Seed random number generator with 2025-01-01
-const seed = new Date('2025-01-01').getTime();
+let seed = new Date('2025-01-01').getTime();
 const random = () => {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
