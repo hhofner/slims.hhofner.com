@@ -1,5 +1,146 @@
 ---
+const tasks = {
+  hardest: [
+    "make good laugenwäckle",
+    "20,000km swimming (total)",
+    "1 successful freelance project",
+    "100万円貯まる",
+    "learn to play **La Catedral**"
+  ],
+  hard: [
+    "8 books",
+    "90 day anki streak",
+    "3 apps in production",
+    "75kg bench press", 
+    "make a game with löve"
+  ],
+  slightlyDifficult: [
+    "50km running (total)",
+    "finish 1 book in Japanese",
+    "one screen-free day (from 9am to 9pm)",
+    "finish Elixir exercism track",
+    "春スキー@月山"
+  ],
+  medium: [
+    "make tortillas",
+    "太白山 with baby ３回",
+    "Finish three.js journey course",
+    "finish Carcassi guitar book",
+    "Go to one developer meetup"
+  ],
+  easy: [
+    "go to Sendai tram museum",
+    "地底の森ミュージアム行く",
+    "Have a beer with someone I've never had a beer with",
+    "write one short story"
+  ]
+};
 
+// Seed random number generator with 2025-01-01
+const seed = new Date('2025-01-01').getTime();
+const random = () => {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+};
+
+// Flatten and shuffle all tasks
+const allTasks = [...tasks.hardest, ...tasks.hard, ...tasks.slightlyDifficult, ...tasks.medium, ...tasks.easy];
+for (let i = allTasks.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [allTasks[i], allTasks[j]] = [allTasks[j], allTasks[i]];
+}
+
+// Insert FREE space in the middle (index 12)
+allTasks.splice(12, 0, "*FREE*");
 ---
 
-<div>bingo card!!</div>
+<div class="bingo-container">
+  <div class="bingo-card">
+    <div class="header">
+      <div>H</div>
+      <div>A</div>
+      <div>P</div>
+      <div>P</div>
+      <div>Y</div>
+    </div>
+    <div class="grid">
+      {allTasks.map((task, i) => (
+        <div class={`cell ${i === 12 ? 'free' : ''}`} data-cell={i}>
+          {task}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .bingo-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  .bingo-card {
+    background: white;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: #333;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .header div {
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: #333;
+    padding: 2px;
+  }
+
+  .cell {
+    background: white;
+    aspect-ratio: 1;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+
+  .cell:hover {
+    background: #f0f0f0;
+  }
+
+  .free {
+    background: #ffeb3b;
+    font-weight: bold;
+  }
+
+  .free:hover {
+    background: #fdd835;
+  }
+
+  @media (max-width: 600px) {
+    .cell {
+      font-size: 0.7rem;
+      padding: 0.25rem;
+    }
+  }
+</style>
