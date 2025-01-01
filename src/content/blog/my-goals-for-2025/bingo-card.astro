@@ -54,95 +54,31 @@ for (let i = allTasks.length - 1; i > 0; i--) {
 allTasks.splice(12, 0, "*FREE*");
 ---
 
-<div class="bingo-container">
-  <div class="bingo-card">
-    <div class="header">
-      <div>H</div>
-      <div>A</div>
-      <div>P</div>
-      <div>P</div>
-      <div>Y</div>
+<div class="flex justify-center py-8">
+  <div class="w-full max-w-[800px] overflow-hidden bg-gray-900 border-2 border-gray-700 rounded-lg">
+    <div class="grid grid-cols-5 bg-gray-800 text-white font-bold text-2xl">
+      <div class="p-2 text-center">H</div>
+      <div class="p-2 text-center">A</div>
+      <div class="p-2 text-center">P</div>
+      <div class="p-2 text-center">P</div>
+      <div class="p-2 text-center">Y</div>
     </div>
-    <div class="grid">
+    <div class="grid grid-cols-5 gap-0.5 bg-gray-700 p-0.5">
       {allTasks.map((task, i) => (
-        <div class={`cell ${i === 12 ? 'free' : ''}`} data-cell={i}>
+        <div 
+          class={`
+            aspect-square p-2 flex items-center justify-center text-center 
+            text-sm sm:text-base text-white cursor-pointer transition-colors
+            ${i === 12 
+              ? 'bg-yellow-900 hover:bg-yellow-800 text-yellow-300 font-bold' 
+              : 'bg-gray-800 hover:bg-gray-700'
+            }
+          `} 
+          data-cell={i}
+        >
           {task}
         </div>
       ))}
     </div>
   </div>
 </div>
-
-<style>
-  .bingo-container {
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0;
-  }
-
-  .bingo-card {
-    background: #1a1a1a;
-    border: 2px solid #333;
-    border-radius: 8px;
-    overflow: hidden;
-    max-width: 800px;
-    width: 100%;
-  }
-
-  .header {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    background: #2d2d2d;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-
-  .header div {
-    padding: 0.5rem;
-    text-align: center;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2px;
-    background: #333;
-    padding: 2px;
-  }
-
-  .cell {
-    background: #2d2d2d;
-    color: white;
-    aspect-ratio: 1;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
-    cursor: pointer;
-  }
-
-  .cell:hover {
-    background: #3d3d3d;
-  }
-
-  .free {
-    background: #4a4a00;
-    color: #ffeb3b;
-    font-weight: bold;
-  }
-
-  .free:hover {
-    background: #5a5a00;
-  }
-
-  @media (max-width: 600px) {
-    .cell {
-      font-size: 0.7rem;
-      padding: 0.25rem;
-    }
-  }
-</style>
