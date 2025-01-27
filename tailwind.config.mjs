@@ -8,7 +8,11 @@ export default {
       fontFamily: {
         sans: ["Geist Sans", ...defaultTheme.fontFamily.sans],
         mono: ["Geist Mono", ...defaultTheme.fontFamily.mono],
+        m6x11: ["m6x11", ...defaultTheme.fontFamily.sans]
       },
+      aspectRatio: {
+        'playing-card': '1/1.4',
+      }
     },
   },
   plugins: [require("@tailwindcss/typography")],
