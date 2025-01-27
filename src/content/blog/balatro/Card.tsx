@@ -1,5 +1,5 @@
 import Spade from "./Spade";
-import { useAnimate, stagger } from "motion/react"
+import { useAnimate } from "motion/react"
 
 export default function Card() {
   const [scope, animate] = useAnimate()
@@ -10,7 +10,7 @@ export default function Card() {
       [scope.current, { rotateZ: -8 } ],
       [scope.current, { rotateZ: 0, scale: 0.85 }],
       [scope.current, { rotateZ: 0, scale: 1 }, {  type: "spring", damping: 5 }],
-    ]
+    ] as any[]
 
     await animate(sequence, { duration: 0.4})
   }
