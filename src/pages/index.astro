@@ -6,7 +6,7 @@ import ArrowCard from '@components/ArrowCard.astro'
 import Link from '@components/Link.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { fetchBooks } from '@lib/utils'
+import { fetchBooks, fetchPictures } from '@lib/utils'
 
 const raw_blog = (await getCollection('blog')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
@@ -28,6 +28,7 @@ const projects: CollectionEntry<'projects'>[] = (await getCollection('projects')
   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE)
 
 const books = await fetchBooks()
+const pictures = await fetchPictures()
 ---
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -66,6 +67,35 @@ const books = await fetchBooks()
           </ul>
         </section> -->
 
+    <section class="animate mt-4 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-y-2">
+        <h2 class="font-semibold text-black dark:text-white">Latest Pictures</h2>
+        <Link href="https://pixelfed.tokyo/i/portfolio/slims" external={true}> See all pictures </Link>
+      </div>
+      <ul class="not-prose flex gap-4 overflow-x-auto">
+        {pictures.slice(0, 5).map((picture) => (
+          <li class="flex-shrink-0">
+            <Link href={picture.url} external={true}>
+              <img class="h-96 rounded" src={picture.media_attachments[0].preview_url} alt={picture.media_attachments[0].description}/>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+    <section class="animate mt-4 space-y-4">
+      <h2 class="font-semibold text-black dark:text-white">Latest Read Books</h2>
+      <ul class="not-prose flex gap-4 overflow-x-auto">
+      {
+        books.map((book) => (
+        <li class="flex-shrink-0">
+          <a href={book.link}>
+          <img src={book.imageUrl} alt={book.name} class="h-48 w-32 object-cover rounded" />
+          </a>
+        </li>
+        ))
+      }
+      </ul>
+    </section>
     <section class="animate mt-4 space-y-4">
       <h2 class="font-semibold text-black dark:text-white">Socials</h2>
       <article></article>
@@ -109,20 +139,6 @@ const books = await fetchBooks()
             </li>
           ))
         }
-      </ul>
-    </section>
-    <section class="animate mt-4 space-y-4">
-      <h2 class="font-semibold text-black dark:text-white">Latest Read Books</h2>
-      <ul class="not-prose flex gap-4 overflow-x-auto">
-      {
-        books.map((book) => (
-        <li class="flex-shrink-0">
-          <a href={book.link}>
-          <img src={book.imageUrl} alt={book.name} class="h-48 w-32 object-cover transition-transform duration-300 hover:scale-105" />
-          </a>
-        </li>
-        ))
-      }
       </ul>
     </section>
   </Container>
