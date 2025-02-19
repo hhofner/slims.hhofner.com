@@ -82,3 +82,94 @@ export async function fetchBooks(): Promise<BookInfo[]> {
     imageUrl: item.cover.url
   }));
 }
+
+interface PixelfedPost {
+  id: string;
+  uri: string;
+  url: string;
+  in_reply_to_id: string | null;
+  in_reply_to_account_id: string | null;
+  reblog: any | null;
+  content: string;
+  created_at: string;
+  emojis: any[];
+  reblogs_count: number;
+  favourites_count: number;
+  reblogged: boolean;
+  favourited: boolean;
+  muted: boolean;
+  sensitive: boolean;
+  spoiler_text: string;
+  visibility: 'public' | 'private' | 'unlisted' | 'direct';
+  application: {
+    name: string;
+    website: string | null;
+  };
+  language: string | null;
+  mentions: any[];
+  tags: any[];
+  poll: any | null;
+  edited_at: string | null;
+  account: PixelfedAccount;
+  replies_count: number;
+  media_attachments: MediaAttachment[];
+  bookmarked: boolean;
+}
+
+interface PixelfedAccount {
+  id: string;
+  username: string;
+  acct: string;
+  display_name: string;
+  discoverable: boolean;
+  locked: boolean;
+  followers_count: number;
+  following_count: number;
+  statuses_count: number;
+  note: string;
+  url: string;
+  avatar: string;
+  created_at: string;
+  avatar_static: string;
+  bot: boolean;
+  emojis: any[];
+  fields: any[];
+  header: string;
+  header_static: string;
+  last_status_at: string | null;
+}
+
+interface MediaAttachment {
+  id: string;
+  type: 'image' | 'video' | 'gifv' | 'audio';
+  url: string;
+  remote_url: string | null;
+  preview_url: string;
+  text_url: string | null;
+  meta: {
+    focus: {
+      x: number;
+      y: number;
+    };
+    original: {
+      width: number;
+      height: number;
+      size: string;
+      aspect: number;
+    };
+  };
+  description: string | null;
+  blurhash: string;
+}
+
+export async function fetchPictures(): Promise<PixelfedPost[]> {
+  const accountId = import.meta.env.PIXELFED_ACCOUNT_ID
+  const url = `https://pixelfed.tokyo/api/v1/accounts/${accountId}/statuses`
+  const headers = new Headers()
+  const pixelfedKey = import.meta.env.PIXELFED_KEY
+  headers.append("Authorization", `Bearer ${pixelfedKey}`)
+  
+  const response = await fetch(url, {headers})
+  const data = await response.json()
+  return data as PixelfedPost[]
+}
