@@ -20,7 +20,7 @@ body {
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-blue-50 dark:bg-blue-900;
+  @apply bg-blue-50 dark:bg-black;
   @apply text-black/75 dark:text-white/75;
 }
 
