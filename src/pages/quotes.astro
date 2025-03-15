@@ -1,0 +1,36 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import Quote from "@components/Quote.astro";
+import { HOME } from "@consts";
+
+const quotes = [
+	{
+		author: "Mathias",
+		quote: "My advice: Remember that your lifetime is finite, and your daily hours are finite. It is impossible to do all the things that are worth doing, so you’ll have to make a choice about what you want to pursue.",
+		link: ""
+	}
+]
+---
+
+<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+	<aside data-pagefind-ignore>
+	  <h1 class="animate font-semibold text-black dark:text-white">/quotes</h1>
+	  <p>A collection of quotes that I enjoyed</p>
+	  <div class="mt-8 space-y-16">
+		<section class="space-y-8">
+	    	<ul class="list-inside space-y-2">
+				{
+					quotes.map((quote) => 
+						<li class="space-y-2 my-4">
+							<Quote author={quote.author} quote={quote.quote} />
+						</li>
+					)
+				}
+	    	</ul>
+		</section>
+	  </div>
+	</aside>
+  </Container>
+</Layout>
