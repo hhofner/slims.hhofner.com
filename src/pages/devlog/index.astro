@@ -59,7 +59,7 @@ const years = Object.keys(entriesByYear).sort((a, b) => parseInt(b) - parseInt(a
               {year}
             </div>
             <div class="space-y-8">
-              {entriesByYear[year].map(async (entry) => {
+              {entriesByYear[year].map(async (entry: any) => {
                 const { Content } = await entry.render()
                 return (
                 <article class="">
