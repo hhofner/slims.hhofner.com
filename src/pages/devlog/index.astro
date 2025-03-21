@@ -20,14 +20,26 @@ type Acc = {
   [year: string]: CollectionEntry<"devlog">[];
 };
 
-const entriesByYear = entries.reduce((acc: Acc, entry) => {
-  const year = entry.data.date.getFullYear().toString();
-  if (!acc[year]) {
-    acc[year] = [];
+// const entriesByYear = entries.reduce((acc: Acc, entry) => {
+//   const year = entry.data.date.getFullYear().toString();
+//   if (!acc[year]) {
+//     acc[year] = [];
+//   }
+//   const { Content } = await entry.render()
+//   acc[year].push(Content);
+//   return acc;
+// }, {});
+
+const entriesByYear: Record<string, any> = {}
+
+for (const entry of entries) {
+  const year = entry.data.date.getFullYear().toString()
+  if (!entriesByYear[year]) {
+    entriesByYear[year] = [];
   }
-  acc[year].push(entry);
-  return acc;
-}, {});
+  const { Content } = await entry.render()
+  entriesByYear[year].push(entry)
+}
 
 const years = Object.keys(entriesByYear).sort((a, b) => parseInt(b) - parseInt(a));
 ---
@@ -47,7 +59,9 @@ const years = Object.keys(entriesByYear).sort((a, b) => parseInt(b) - parseInt(a
               {year}
             </div>
             <div class="space-y-8">
-              {entriesByYear[year].map((entry) => (
+              {entriesByYear[year].map(async (entry) => {
+                const { Content } = await entry.render()
+                return (
                 <article class="">
                   <div class="mb-2 flex items-center justify-between">
                     <span class="text-sm text-black/60 dark:text-white/60">
@@ -55,10 +69,10 @@ const years = Object.keys(entriesByYear).sort((a, b) => parseInt(b) - parseInt(a
                     </span>
                   </div>
                   <div class="prose prose-neutral dark:prose-invert">
-                    {entry.body}
+                    <Content />
                   </div>
                 </article>
-              ))}
+              )})}
             </div>
           </section>
         ))
