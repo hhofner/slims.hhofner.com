@@ -14,7 +14,6 @@ const blog = defineCollection({
 const devlog = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string(),
     content: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
