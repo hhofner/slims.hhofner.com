@@ -11,6 +11,16 @@ const blog = defineCollection({
   }),
 });
 
+const devlog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    content: z.string(),
+    date: z.coerce.date(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 const projects = defineCollection({
   type: "content",
   schema: z.object({
@@ -23,4 +33,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, projects };
+export const collections = { blog, projects, devlog };

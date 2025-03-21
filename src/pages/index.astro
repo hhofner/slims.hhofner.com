@@ -7,6 +7,7 @@ import Link from '@components/Link.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import { fetchBooks, fetchPictures } from '@lib/utils'
+import FormattedDate from '@components/FormattedDate.astro'
 
 const raw_blog = (await getCollection('blog')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
@@ -22,10 +23,15 @@ const raw_tags = new Set([
 
 const tags = Array.from(raw_tags)
 
-const projects: CollectionEntry<'projects'>[] = (await getCollection('projects'))
-  .filter((project) => !project.data.draft)
+// const projects: CollectionEntry<'projects'>[] = (await getCollection('projects'))
+//   .filter((project) => !project.data.draft)
+//   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+//   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE)
+
+const devlogs = (await getCollection('devlog'))
+  .filter((entry) => !entry.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE)
+  .slice(0, SITE.NUM_DEVLOGS_ON_HOMEPAGE)
 
 const books = await fetchBooks()
 const pictures = await fetchPictures()
@@ -97,8 +103,26 @@ const pictures = await fetchPictures()
       </ul>
     </section>
     <section class="animate mt-4 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-y-2" >
+        <h2 class="font-semibold text-black dark:text-white">Devlog
+      </h2>
+        <Link href="/devlog">See all devlogs</Link>
+        </div>
+      {devlogs.length > 0 ? <ul class="not-prose flex flex-col gap-4">
+        {
+          devlogs.map((post) => (
+            <li class="border-b border-stone-200 pb-2">
+              <small class="block text-stone-500">
+                <FormattedDate date={post.data.date} />
+              </small>
+              <p>{post.data.content}...<Link href="/devlog">Read more</Link></p>
+            </li>
+          ))
+        }
+      </ul> : <p>No devlogs yet.</p>}
+    </section>
+    <section class="animate mt-4 space-y-4">
       <h2 class="font-semibold text-black dark:text-white">Socials</h2>
-      <article></article>
       <ul class="not-prose flex flex-wrap gap-2">
         {
           SOCIALS.map((SOCIAL) => (
