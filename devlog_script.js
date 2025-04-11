@@ -30,15 +30,16 @@ function formatDate(date) {
 	return date.toISOString().split("T")[0];
 }
 
-function getSlug(content) {
-	var slug = content.match(/^slug: (.*)$/m);
-	if (slug) return slug[1];
-	var firstLine = content.split("\n")[0].trim();
-	if (!firstLine) throw new Error("No valid title found");
-	return firstLine.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(
-		/^-|-$/g,
-		"",
-	);
+function getSlug(_content) {
+	// var slug = content.match(/^slug: (.*)$/m);
+	// if (slug) return slug[1];
+	// var firstLine = content.split("\n")[0].trim();
+	// if (!firstLine) throw new Error("No valid title found");
+	// return firstLine.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(
+	// 	/^-|-$/g,
+	// 	"",
+	// );
+	return "id" + Math.random().toString(16).slice(2);
 }
 
 function createFrontMatter(content, publishDate) {
