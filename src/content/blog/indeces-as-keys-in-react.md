@@ -1,28 +1,37 @@
 ---
-title: Using indeces as keys in React
-description: An explanation of a React fundamental
-date: 2022-05-18
+title: Remembered, Yet Forgotten
+description: A small essay
+date: 2025-04-15
 status: published
-tags: ["react", "frontend", "ui", "optimization"]
+tags: ["life"]
 ---
 
-## Introduction
+I didn’t know it yet at the time, but studying abroad in Germany would
+significantly impact the direction of my life. I remember riding the way, not
+thinking much of the butterfly effects in life. Of all its repecurscsions, one
+has stood with me for some time and makes me happy but sad, and that is
+remembering a great friend that I made.
 
-Using the index of an array as a key in React is considered to be an anti-pattern and is not recommended.
+During my time abroad, I met a lot of people who left a lasting impression, but
+in particular, I had made an incredible friend with whom I had a genuine
+connection with. As we moved on to our lives- me moving back to the US-, this
+person stayed in my heart, and I tried my best to stay in contact with them.
 
-## The Problem
+After almost 10 years, we finally met up again, in Japan, and it was an amazing
+time. It was incredible seeing them again, the rush of feelings I got
+remembering all the fun times we had, all the long discussions. I felt like I
+was transferred back to the times.
 
-This [article](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318) by Robin Pokorny explains it well.
+But unfortunately, I started to question if the person shared the same opinion
+of the connection that I thought we had. They had never initiated any contact
+with me, and even a year after meeting, I never received another message again.
+Remembered, yet forgotten.
 
-The key is how React knows if something is unique or not in a list. By looking at the key, it can understand if it exists, or where it should be positioned.
+It makes me wonder how many people I’ve left a lasting impression on, but have
+not been able to remember and contact. Maybe none, or maybe a few. I am not
+angry, and I am sad to some degree, but I can never blame them. One lives their
+lives as they do. How could I expect them to reserve mental space for me? But it
+still saddens me, perhaps because I yearn to be back in those days, and they are
+my only lasting connections to it.
 
-However, the indeces "never change" when swapping items. Let's say you want to swap two items in a list and you're using indeces as keys. What's the difference then, between
-`[ 1, 2, 3, 4, 5 ]` and `[ 1, 2, 3, 4, 5 ]` ? Essentially that's what _React sees_. But if you use more unique keys that are actually tied to the underlying object, you can see why this makes sense:
-
-**Before update:**
-`[ "title1_1646", "title2_9913", "title4_8135", "title3_0013", "title5_1224" ]`
-
-**After update:**
-`[ "title1_1646", "title2_9913", "title3_0013", "title4_8135", "title5_1224" ] `
-
-From this you can clearly see the swap change, and are then able to render optimally. Remember, a lot of React is about comparing before & after states.
+Remembered, yet forgotten
