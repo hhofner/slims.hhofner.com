@@ -1,0 +1,70 @@
+---
+title: "Notes on AI Coding Tools"
+tags: ["development", "coding", "AI"]
+description: "Rough notes as I explore using AI coding tools"
+date: "2025-07-02"
+---
+
+Note: I don’t think I came even close to finishing this post, but as things move fast I wanted to publish this.
+
+I’ve been trying to integrate AI tools into my workflow so I don’t get left behind, or at least to try to find a way to improve my efficiency and quality.  The usage of AI tools, whether they help in the long run or not is still inconclusive. However, after this post you the reader might gain a better understanding of how I view these AI tools. 
+
+The motivation from this post comes from reading several think pieces about AI from much smarter people than me. I’m sure there will be many more after this.
+
+These are the AI tools that I’ve been playing with and trying to incorporate into my workflow:
+- ChatGPT
+- Gemini
+- Claude Code
+- Copilot (just the autocomplete)
+- Cursor
+- Zed (particularly the agents feature)
+- Cline
+- Aider
+- Eraser
+- Raycast AI
+- Perplexity
+
+You can probably broadly separate these into agents and non-agent categories, with the agents category containing Claude Code, Cursor, Aider, Zed, and now Github Copilot.
+
+I’ll start with these as they seem to be the natural next step of the AI evolution. And by “seem” I mean, it already is. The thing however with these agents, and it applies to AI broadly, is that the financials are vague to me. It’s not clear whether the current AI pricing will get better, and based on reports, companies like OpenAI and Anthropic are burning money, while still trying to raise capital. This is a classic route to entshitification, but some people may disagree. Can we expect hardware and software improvements in the future? That’s assuming that models stay constant!
+
+Zed and Cursor (and Windsurf, [and Claude Code as well] which I’ve never tried) both provide a $20 monthly subscription to some base amount of calls to an agent (Cursor has it at unlimited, but we’ll get to that). These seem to me to be the best value if you plan to heavily use these tools. But again, it’s unclear to me whether these plans will stay at $20 or whether they’re going to nerf it (some Reddit posts report that Cursor already has). 
+
+Which bring us to Cursor - a highly valued company at the moment, everything is so up in the air for them. They act effectively as a middle man, since they don’t provide any models themselves, not even the editor! They are just context jugglers, and that is their magic sauce. Behind the scenes, at least from what I gather, they have clever tricks to try and reduce their AI costs by using lower end models when possible. I’d be more curious about this if they weren’t the better Agent tool out there (based on my experience).
+
+On the other end of the spectrum of agents is Cursor Code, a CLI tool made by Anthropic which solely interacts with Anthropic models. Since there isn’t a middle man here, there’s less incentive to reduce costs by using lower models and thus you get generally better quality with Claude Code, and this is something I’ve noticed as well. The difference here is that Claude Code uses up its context limits very quickly, which would then force you to their $100 a month plan! 
+
+Other agents like Cline, similar to Cursor but just as a VSCode extension, and Aider, just as a CLI tool, have potentials of money burning like no other. They both interact directly with whatever model provider you choose by using an API key tied to your credit card. There’s no incentive talking here, it is just straight balls to the walls you paying for every single model inference invocation, and as they’re agents, they make as many API calls as they need to to finish the job. Financials maybe here seem a bit more stable as API calls just feel more stable. It’s closer to the metal. But in having used these tools, I have easily “burned” $5 or more a day on asking agents to do things. It can get pricey if you heavily use these things and that’s the supposed trend.
+
+The takeaway here is that these tools are actually expensive, and could get even more expensive.
+
+Beside that, here are some more practical things I’ve noted:
+
+Context Issues
+
+In both Cursor and Zed, I often find myself having troubles effectively providing context to the agents. I try to give it context as I would to a fellow engineer, and it struggles with the task half of the time. When I have the agent find the context themselves, it seems like it can produce a better output but I think this adds three problems:
+- More API calls to actually find context
+- Increases the context window
+- Takes a bit more time
+
+I thought I may be able to improve the above issues by providing the context myself, but it seems to backfire.
+
+Even with asking the agents to find context themselves, I find them often having issues. They often skip important files that have an implementation that should be copied and modified, and end up writing a completely different implementation. Often, they have no idea how the 3rd party library API structure looks like, and end up hallucinating at times, which can be very frustrating. Cursor has the ability to search the internet, but it has only worked for me like a third of the time.
+
+And here’s the kicker, you have to play this context game every single time when you start a new thread. You have to play clue finder, every single time you start a new thread even though you yourself already have all the context in your head.
+
+And here’s the double kicker- Zed and Cursor often fail because I have included too much in the context window. Including an entire directory, which I’ve done a few times, has gotten me to run out of context window space and forced me to start a new thread.
+
+Eagerness
+
+It’s often recommended that you are very detailed in your prompts, and this can be sometimes a challenge, as I can be lazy. And I know why this is recommended because often times I’ve noticed the agents are very eager to add things not asked for. Often times, they spit out markdown files listing and explaining a particular feature they implemented, or add extra features unasked for. At times it can be very excessive.
+
+Skill Atrophy and Standing Out
+
+Over all of this, there is this weird lingering feeling that ones skills is atrophying. And the argument is that maybe that’s fine, that there is no need to learn the intricacies of programming systems but rather the big picture instead. I’m not sure about this at this moment, because the fact remains, that I am responsible for the code being put out there. Putting out code that I can’t understand is a risk. 
+
+As I think about skill acquisition and atrophy, I wonder about the market as whole and my position in it, more concretely if programming evolve entirely to be just interacting with a coding agent, what would differentiate me from other developers? Some people say it’s not the code that was what generated value, so one could separate themselves from others by understanding more about system design, or product requirements. Maybe that’s true?
+
+Closing Thoughts
+
+Overall, I am not sure where I stand with the usage of these tools. Somedays I am impressed with what they output. Somedays I think, it’s all slop, and people who value it have nothing ever to show for. It’s really hard to say how this will all play out. For now, I think I will just continue trying it at work and seek as many opportunities to work without it as possible. 
