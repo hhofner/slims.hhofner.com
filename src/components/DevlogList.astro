@@ -1,0 +1,21 @@
+---
+import FormattedDate from './FormattedDate.astro'
+
+const { devlogs } = Astro.props
+---
+
+<ul class="not-prose flex flex-col gap-4">
+  {
+    await Promise.all(devlogs.map(async (post) => {
+      const { Content } = await post.render()
+      return (
+        <li class="border-b border-stone-200 pb-2">
+          <small class="block text-stone-500">
+            <FormattedDate date={post.data.date} />
+          </small>
+          <Content />
+        </li>
+      )
+    }))
+  }
+</ul>
