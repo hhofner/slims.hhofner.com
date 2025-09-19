@@ -18,6 +18,8 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/geist-mono": "^5.0.3",
     "@fontsource/geist-sans": "^5.0.3",
+    "@keystatic/astro": "^5.0.6",
+    "@keystatic/core": "^0.5.48",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "astro": "^4.11.3",
