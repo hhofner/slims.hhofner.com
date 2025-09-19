@@ -5,8 +5,6 @@ date: "2024-03-21"
 draft: true
 ---
 
----
-
 ## Working with the `blog` collection:
 
 The `blog` collection is found in `src/content/blog`.
@@ -23,8 +21,6 @@ In the above example, two blog posts will be generated with the folder name repr
 
 - `https://example.com/blog/post-1`
 - `https://example.com/blog/post-2`
-
----
 
 ## Provide metadata
 
@@ -45,8 +41,6 @@ draft: false;
 | description | Yes | string  | Description of the content. Used in SEO and RSS. |
 | date        | Yes | string  | Must be a valid date string (able to be parsed). |
 | draft       | No  | boolean | If draft: true, content will not be published.   |
-
----
 
 All that's left to do is write the content under the metadata.
 

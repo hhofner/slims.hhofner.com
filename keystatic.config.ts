@@ -8,13 +8,14 @@ export default config({
     blog: collection({
       label: 'Blog Posts',
       slugField: 'title',
-      path: 'src/content/blog/*/',
-      format: { contentField: 'content', extension: 'md' },
+      path: 'src/content/blog/*/index',
+      format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         description: fields.text({
           label: 'Description',
           description: 'A brief description of the post',
+          validation: { length: { min: 1 } },
         }),
         date: fields.date({
           label: 'Publication Date',
@@ -25,6 +26,15 @@ export default config({
           description: 'Check to save as draft',
           defaultValue: false,
         }),
+        status: fields.select({
+          label: 'Status',
+          description: 'Publication status',
+          options: [
+            { label: 'Published', value: 'published' },
+            { label: 'Draft', value: 'draft' },
+          ],
+          defaultValue: 'published',
+        }),
         tags: fields.array(
           fields.text({ label: 'Tag' }),
           {
@@ -32,11 +42,9 @@ export default config({
             itemLabel: props => props.value,
           }
         ),
-        content: fields.document({
+        content: fields.markdoc({
           label: 'Content',
-          formatting: true,
-          dividers: true,
-          links: true,
+          extension: 'md',
           images: {
             directory: 'src/content/blog',
             publicPath: '/src/content/blog/',
@@ -48,7 +56,7 @@ export default config({
       label: 'Dev Log',
       slugField: 'title',
       path: 'src/content/devlog/*',
-      format: { contentField: 'content', extension: 'md' },
+      format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         date: fields.date({
@@ -60,11 +68,9 @@ export default config({
           description: 'Check to save as draft',
           defaultValue: false,
         }),
-        content: fields.document({
+        content: fields.markdoc({
           label: 'Content',
-          formatting: true,
-          dividers: true,
-          links: true,
+          extension: 'md',
         }),
       },
     }),
@@ -72,7 +78,7 @@ export default config({
       label: 'Projects',
       slugField: 'title',
       path: 'src/content/projects/*/',
-      format: { contentField: 'content', extension: 'md' },
+      format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         description: fields.text({
@@ -96,15 +102,9 @@ export default config({
           label: 'Repository URL',
           description: 'Link to source code (optional)',
         }),
-        content: fields.document({
+        content: fields.markdoc({
           label: 'Content',
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: {
-            directory: 'src/content/projects',
-            publicPath: '/src/content/projects/',
-          },
+          extension: 'md',
         }),
       },
     }),
