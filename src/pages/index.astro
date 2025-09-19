@@ -1,5 +1,6 @@
 ---
-import Layout from '@layouts/Layout.astro'
+import NewLayout from '@layouts/NewLayout.astro'
+// import Layout from '@layouts/Layout.astro'
 import Container from '@components/Container.astro'
 import { SITE, HOME, SOCIALS } from '@consts'
 import ArrowCard from '@components/ArrowCard.astro'
@@ -12,7 +13,20 @@ import DevlogList from '@components/DevlogList.astro'
 
 const raw_blog = (await getCollection('blog')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
-const blog = raw_blog.slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
+const blog = raw_blog
+
+// Group posts by year
+const postsByYear = blog.reduce((acc, post) => {
+  const year = post.data.date.getFullYear()
+  if (!acc[year]) {
+    acc[year] = []
+  }
+  acc[year].push(post)
+  return acc
+}, {} as Record<number, typeof blog>)
+
+// Sort years in descending order
+const sortedYears = Object.keys(postsByYear).map(Number).sort((a, b) => b - a)
 
 // collect all tags in a set to remove duplicates
 const raw_tags = new Set([
@@ -38,126 +52,27 @@ const devlogs = (await getCollection('devlog'))
 const pictures = await fetchPictures()
 ---
 
-<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <section class="animate mt-4 space-y-6">
-      <div class="flex flex-wrap items-center justify-between gap-y-2">
-        <h2 class="font-semibold text-black dark:text-white">Latest posts</h2>
-        <Link href="/blog"> See all posts </Link>
-      </div>
-      <ul class="not-prose flex flex-col gap-4">
-        {
-          blog.map((post) => (
+<NewLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <div class="px-8">
+    <h2>Announcement: This blog is rebranding.</h2>
+    <p class="mb-8">For the very few of you who follow this blog, I am changing some things. So please be excuse any horrible style issues.</p>
+
+    {sortedYears.map(year => (
+      <div class="mb-8">
+        <h3 class="text-xl font-bold mb-4">{year}</h3>
+        <ul class="space-y-2">
+          {postsByYear[year].map(post => (
             <li>
-              <ArrowCard entry={post} />
+              <a href={`/blog/${post.slug}`} class="hover:underline">
+                {post.data.title}
+              </a>
+              <span class="ml-2 text-gray-600">
+                ({post.data.date.getFullYear()}-{String(post.data.date.getMonth() + 1).padStart(2, '0')}-{String(post.data.date.getDate()).padStart(2, '0')})
+              </span>
             </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <!-- <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Recent projects
-            </h2>
-            <Link href="/projects"> See all projects </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              projects.map((project) => (
-                <li>
-                  <ArrowCard entry={project} />
-                </li>
-              ))
-            }
-          </ul>
-        </section> -->
-
-    <section class="animate mt-4 space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-y-2">
-        <h2 class="font-semibold text-black dark:text-white">Latest Pictures</h2>
-        <Link href="https://pixelfed.tokyo/i/portfolio/slims" external={true}> See all pictures </Link>
+          ))}
+        </ul>
       </div>
-      <ul class="not-prose flex gap-4 overflow-x-auto">
-        {pictures.slice(0, 5).map((picture) => (
-          <li class="flex-shrink-0">
-            <Link href={picture.url} external={true}>
-              <img class="h-96 rounded" src={picture.media_attachments[0].preview_url} alt={picture.media_attachments[0].description}/>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
-    <!--<section class="animate mt-4 space-y-4">
-      <h2 class="font-semibold text-black dark:text-white">Latest Read Books</h2>
-      <ul class="not-prose flex gap-4 overflow-x-auto">
-      {
-        books.map((book) => (
-        <li class="flex-shrink-0">
-          <a href={book.link}>
-          <img src={book.imageUrl} alt={book.name} class="h-48 w-32 object-cover rounded" />
-          </a>
-        </li>
-        ))
-      }
-      </ul>
-    </section> -->
-    <section class="animate mt-4 space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-y-2" >
-        <h2 class="font-semibold text-black dark:text-white">Devlog
-      </h2>
-        <Link href="/devlog">See all devlogs</Link>
-        </div>
-        {devlogs.length > 0
-          ? <DevlogList devlogs={devlogs} />
-          : <p>No devlogs yet.</p>
-        }
-    </section>
-    <section class="animate mt-4 space-y-4">
-      <h2 class="font-semibold text-black dark:text-white">Socials</h2>
-      <ul class="not-prose flex flex-wrap gap-2">
-        {
-          SOCIALS.map((SOCIAL) => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {'/'}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-    <section class="animate mt-4 space-y-4">
-      <h2 class="font-semibold text-black dark:text-white">Tags</h2>
-      <ul class="flex flex-wrap gap-2 text-left">
-        <!-- { -->
-        <!--   raw_blog -->
-        <!--     .flatMap((post) => post.data.tags) -->
-        <!--     .filter((tag) => !!tag) -->
-        <!--     .map((tag) => ( -->
-        <!--       <li class="flex gap-x-2 text-nowrap"> -->
-        <!--         <Link -->
-        <!--           href={`/tags/${tag?.toLowerCase()}`} -->
-        <!--           aria-label={`Tag: ${tag}`} -->
-        <!--         > -->
-        <!--           #{tag} -->
-        <!--         </Link> -->
-        <!--       </li> -->
-        <!--     )) -->
-        <!-- } -->
-        {
-          tags.map((tag) => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={`/tags/${tag?.toLowerCase()}`} aria-label={`Tag: ${tag}`}>
-                #{tag}
-              </Link>
-            </li>
-          ))
-        }
-        
-      </ul>
-    </section>
-  </Container>
-</Layout>
+    ))}
+  </div>
+</NewLayout>
